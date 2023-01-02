@@ -8,8 +8,8 @@ TODO
 
 ## Format
 ```
-Assets[Card]: 114514CNY
-Assets[Wechat]: 19.19CNY
+Account[Card]: 114514CNY
+Account[Wechat]: 19.19CNY
 Plan: 2000CNY
 
 ** 2023-01-01
@@ -25,4 +25,47 @@ Plan': 1,972.2CNY
 ```
 
 ## Commands
-TODO
+### Create Account
+`account name balance`
+
+Example: `account Wechat 10CNY`
+
+This is equal to:
+```
+Account[Wechat]: 10CNY
+```
+In the `fsd` file.
+
+### Plan Expenses
+`plan value`
+
+Example: `plan 100CNY`
+
+This is equal to:
+```
+Plan: 100CNY
+```
+In the `fsd` file.
+
+### Create Change
+`change account type value`
+
+Example: `change Alipay Food -10CNY`
+
+This is equal to:
+```
+** 2023-01-02 ; today
+  Alipay:Food -10CNY
+```
+In the `fsd` file.
+
+### Update
+`update`
+
+Recalculate parts like this:
+```
+---
+Balance[Card]: 114,586.2CNY
+Balance[Wechat]: 22.19CNY
+Plan': 1,972.2CNY
+```
