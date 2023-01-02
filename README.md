@@ -26,9 +26,9 @@ Plan': 1,972.2CNY
 
 ## Commands
 ### Create Account
-`account name balance`
+`account name balance filename`
 
-Example: `account Wechat 10CNY`
+Example: `account Wechat 10CNY test.fsd`
 
 This is equal to:
 ```
@@ -37,9 +37,9 @@ Account[Wechat]: 10CNY
 In the `fsd` file.
 
 ### Plan Expenses
-`plan value`
+`plan value filename`
 
-Example: `plan 100CNY`
+Example: `plan 100CNY test.fsd`
 
 This is equal to:
 ```
@@ -48,9 +48,9 @@ Plan: 100CNY
 In the `fsd` file.
 
 ### Create Change
-`change account type value`
+`change account type value filename`
 
-Example: `change Alipay Food -10CNY`
+Example: `change Alipay Food -10CNY test.fsd`
 
 This is equal to:
 ```
@@ -60,7 +60,7 @@ This is equal to:
 In the `fsd` file.
 
 ### Update
-`update`
+`update filename`
 
 Recalculate parts like this:
 ```
@@ -69,3 +69,7 @@ Balance[Card]: 114,586.2CNY
 Balance[Wechat]: 22.19CNY
 Plan': 1,972.2CNY
 ```
+
+## TODO
+- [ ] Add optional arguments
+- [ ] Mutiple currencies support
