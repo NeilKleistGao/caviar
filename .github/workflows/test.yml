@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: build project
         shell: bash
-        run: mkdir bin && cmake . -DBUILD_TEST=OFF && cmake --build . --target caviar -DBUILD_TEST=OFF -j 12
+        run: mkdir bin && cmake CMakeLists.txt -DBUILD_TEST=OFF && cmake --build . --target caviar -DBUILD_TEST=OFF -j 12
   test:
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +29,10 @@ jobs:
         run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make
       - name: build diff tests
         shell: bash
-        run: mkdir bin && cmake . && cmake --build . --target diff_test -j 12
+        run: mkdir bin && cmake . && cmake --build . --target diff_tests -j 12
+      - name: execute diff tests
+        shell: bash
+        run: ./bin/diff_tests
       - name: check no change
         shell: bash
         run: git diff-files -p --exit-code --diff-filter=ADMR -w
