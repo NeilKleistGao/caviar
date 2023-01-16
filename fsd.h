@@ -59,6 +59,7 @@ public:
 
   [[nodiscard]] Plan get_rest_plan() const;
   [[nodiscard]] std::vector<Account> get_balances() const;
+  [[nodiscard]] std::unordered_map<std::string, std::vector<Transaction>> group_transactions_by_account() const;
 private:
   using dataline = std::variant<Account, Plan, Transaction>;
   std::vector<dataline> m_data;

@@ -54,6 +54,18 @@ std::vector<fsd::Account> fsd::get_balances() const {
   return accounts;
 }
 
+std::unordered_map<std::string, std::vector<fsd::Transaction>> fsd::group_transactions_by_account() const {
+  std::unordered_map<std::string, std::vector<fsd::Transaction>> groups;
+  for (const auto& data : m_data) {
+    if (data.index() == 2) {
+      auto trans = std::get<Transaction>(data);
+      groups[trans.name].push_back(trans);
+    }
+  }
+
+  return groups;
+}
+
 void fsd::parse(std::ifstream& p_fp) {
   while (!p_fp.eof()) {
     std::string head;

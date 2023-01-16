@@ -24,19 +24,29 @@
 
 #include <filesystem>
 #include <fstream>
+#include <unordered_map>
 
 namespace caviar {
   void summarize(std::string&& p_filename) {
-    auto data = fsd(p_filename);
-    auto balances = data.get_balances();
+    const auto data = fsd(p_filename);
+    const auto balances = data.get_balances();
+    const auto transactions = data.group_transactions_by_account();
+    std::unordered_map<std::string, float> delta; // TODO: add unit
+
+    for (const auto& [account, trans] : transactions) {
+      for (const auto& t : trans) {
+        delta[account] += t.value;
+      }
+    }
 
     std::ofstream fp{p_filename, std::ios::app};
     fp.precision(2);
     fp << "---" << std::endl;
 
     for (const auto& balance : balances) {
+      float d = (delta.find(balance.name) == delta.end()) ? 0.0f : delta[balance.name];
       fp << "Balance[" << balance.name << "]: " <<
-        std::fixed << balance.value << balance.unit << std::endl;
+        std::fixed << balance.value + d << balance.unit << std::endl;
     }
 
     auto rest = data.get_rest_plan();
