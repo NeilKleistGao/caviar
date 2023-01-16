@@ -35,7 +35,8 @@ fsd::fsd(const std::string& p_filename) {
 fsd::Plan fsd::get_rest_plan() const {
   for (const auto& data : m_data) {
     if (data.index() == 1) {
-      return std::get<Plan>(data);
+      auto plan = std::get<Plan>(data);
+      return Plan{plan.unit, plan.value + m_all_negative};
     }
   }
 

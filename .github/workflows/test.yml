@@ -32,7 +32,7 @@ jobs:
         run: mkdir bin && cmake . && cmake --build . --target diff_tests -j 12
       - name: execute diff tests
         shell: bash
-        run: ./bin/diff_tests
+        run: cd bin && ./diff_tests
       - name: check no change
         shell: bash
         run: git diff-files -p --exit-code --diff-filter=ADMR -w

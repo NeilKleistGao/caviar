@@ -28,6 +28,7 @@
 #include <variant>
 #include <vector>
 #include <fstream>
+#include <unordered_map>
 
 class fsd {
 private:
@@ -53,11 +54,12 @@ private:
 public:
   explicit fsd(const std::string& p_filename);
 
-  Plan get_rest_plan() const;
-  std::vector<Account> get_balances() const;
+  [[nodiscard]] Plan get_rest_plan() const;
+  [[nodiscard]] std::vector<Account> get_balances() const;
 private:
   using dataline = std::variant<Account, Plan, Transaction>;
   std::vector<dataline> m_data;
+  float m_all_negative = 0.0f; // TODO: add unit.
 
   void parse(std::ifstream& p_fp);
 };

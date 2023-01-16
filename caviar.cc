@@ -24,8 +24,6 @@
 
 #include <filesystem>
 #include <fstream>
-#include <cstdio>
-#include <cstring>
 
 namespace caviar {
   void summarize(std::string&& p_filename) {
