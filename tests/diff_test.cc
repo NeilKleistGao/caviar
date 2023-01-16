@@ -19,3 +19,9 @@
  */
 
 /// @file diff_test.cc
+
+#include <gtest/gtest.h>
+
+TEST(caviar, diff_tests) {
+  EXPECT_EQ(42, 42);
+}

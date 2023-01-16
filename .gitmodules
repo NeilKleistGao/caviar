@@ -1,0 +1,3 @@
+[submodule "third-parties/cxxopts"]
+	path = third-parties/cxxopts
+	url = git@github.com:jarro2783/cxxopts.git
