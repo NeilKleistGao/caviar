@@ -50,6 +50,9 @@ private:
     std::string category;
     std::string unit;
     float value;
+
+    Transaction(std::string p_n, std::string p_c, std::string p_u, float p_v):
+      name(std::move(p_n)), category(std::move(p_c)), unit(std::move(p_u)), value(p_v) {}
   };
 public:
   explicit fsd(const std::string& p_filename);

@@ -55,7 +55,6 @@ std::vector<fsd::Account> fsd::get_balances() const {
 }
 
 void fsd::parse(std::ifstream& p_fp) {
-  int size = 0;
   while (!p_fp.eof()) {
     std::string head;
     p_fp >> head;
@@ -79,8 +78,26 @@ void fsd::parse(std::ifstream& p_fp) {
 
       m_data.emplace_back(Plan{unit, value});
     }
-    else if (head.find("---")) {
-      break;
+    else {
+      int pos = head.find(':');
+      if (pos != -1) {
+        std::string account = head.substr(0, pos);
+        std::string category = head.substr(pos + 1);
+
+        float value = 0.0f;
+        p_fp >> value;
+        std::string unit;
+        p_fp >> unit;
+
+        if (value < 0.0f) {
+          m_all_negative += value;
+        }
+
+        m_data.emplace_back(Transaction{account, category, unit, value});
+      }
+      else if (head.find("---") != -1) {
+        break;
+      }
     }
   }
 
