@@ -12,10 +12,10 @@ if (BUILD_TEST)
   include_directories(${GTEST_INCLUDE_DIRS})
 endif()
 
-add_executable(caviar main.cc)
+add_executable(caviar main.cc caviar.cc fsd.cc fsd.h)
 
 if (BUILD_TEST)
-  add_executable(diff_tests tests/diff_tests.cc ${CRIMSON_CORE})
+  add_executable(diff_tests tests/diff_tests.cc caviar.cc fsd.cc fsd.h)
   target_link_libraries(diff_tests ${GTEST_BOTH_LIBRARIES})
   target_link_libraries(diff_tests ${CMAKE_THREAD_LIBS_INIT})
 endif()

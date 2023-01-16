@@ -21,7 +21,15 @@
 /// @file diff_test.cc
 
 #include <gtest/gtest.h>
+#include <filesystem>
+
+#include "../caviar.h"
 
 TEST(caviar, diff_tests) {
-  EXPECT_EQ(42, 42);
+  const auto dir = std::filesystem::path{"../tests/fsd"};
+  for (const auto& it : std::filesystem::directory_iterator{dir}) {
+    std::string filename = it.path().string();
+    caviar::truncate(filename);
+    caviar::summarize(std::move(filename));
+  }
 }
