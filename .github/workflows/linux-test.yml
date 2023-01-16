@@ -1,4 +1,4 @@
-name: caviar tests
+name: caviar linux tests
 
 on:
   push:
