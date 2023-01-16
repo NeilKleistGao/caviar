@@ -24,4 +24,4 @@ jobs:
         with:
           msbuild-architecture: x64
       - name: build project
-        run: msbuild caviar.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release
+        run: msbuild caviar.vcxproj -t:rebuild -property:Configuration=Release
