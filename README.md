@@ -1,10 +1,19 @@
 # caviar
+[![caviar linux tests](https://github.com/NeilKleistGao/caviar/actions/workflows/linux-test.yml/badge.svg?branch=main)](https://github.com/NeilKleistGao/caviar/actions/workflows/linux-test.yml)
+[![caviar windows tests](https://github.com/NeilKleistGao/caviar/actions/workflows/windows-test.yml/badge.svg?branch=main)](https://github.com/NeilKleistGao/caviar/actions/workflows/windows-test.yml)
+
 > New car, caviar, four star daydream and I think I will buy me a football team :)
+
+![caviar.png](caviar.png)
 
 A simple tool that helps you keep track of your personal expenses in Emacs.
 
 ## Install
-TODO
+- 1. Download the binary pack for your OS and make it accessible in terminals
+- 2. Add `caviar.el` into your Emacs configurations like:
+```lisp
+(load-file "caviar.el")
+```
 
 ## Format
 ```
@@ -25,7 +34,11 @@ Plan': 1,972.2CNY
 ```
 
 ## Commands
-TODO
+| Hotkeys   | Commands           |
+| ---       | ---                |
+| `C-c C-a` | Calculate Balances |
 
 ## TODO
-- [ ] Add optional arguments
+- [ ] Add full units supports
+- [ ] Sum of each category
+- [ ] Better highlight in Emacs
