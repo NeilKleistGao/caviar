@@ -1,0 +1,12 @@
+Account[Card]: 114514CNY
+Account[Wechat]: 19.19CNY
+
+** 2023-01-01
+  Card:Income +100CNY
+** 2023-01-02
+  Card:Food -27.8CNY
+  Wechat:LiveBonus +3.0CNY
+
+---
+Balance[Card]: 114586.20CNY
+Balance[Wechat]: 22.19CNY

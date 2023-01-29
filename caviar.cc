@@ -39,7 +39,10 @@ namespace caviar {
     }
 
     auto rest = data.get_rest_plan();
-    fp << "Plan': " <<  std::fixed << rest.value << rest.unit << std::endl;
+    if (rest.has_value()) {
+      const auto& plan = rest.value();
+      fp << "Plan': " <<  std::fixed << plan.value << plan.unit << std::endl;
+    }
 
     fp.close();
   }
@@ -53,8 +56,12 @@ namespace caviar {
 
     unsigned int size = 0;
     char buffer[1024];
-    while (!fp.eof()) {
+    while (true) {
       unsigned int real_size = fp.readsome(buffer, sizeof(buffer));
+      if (real_size == 0) {
+        break;
+      }
+
       const std::string s = buffer;
       const int pos = s.find("---");
       if (pos != -1) {
