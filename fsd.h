@@ -18,6 +18,7 @@
 #include <vector>
 #include <fstream>
 #include <unordered_map>
+#include <optional>
 
 class fsd {
 private:
@@ -46,7 +47,7 @@ private:
 public:
   explicit fsd(const std::string& p_filename);
 
-  [[nodiscard]] Plan get_rest_plan() const;
+  [[nodiscard]] std::optional<Plan> get_rest_plan() const;
   [[nodiscard]] std::vector<Account> get_balances() const;
   [[nodiscard]] std::unordered_map<std::string, std::vector<Transaction>> group_transactions_by_account() const;
 private:
