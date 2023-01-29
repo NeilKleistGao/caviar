@@ -21,7 +21,7 @@ fsd::fsd(const std::string& p_filename) {
   parse(fp);
 }
 
-fsd::Plan fsd::get_rest_plan() const {
+std::optional<fsd::Plan> fsd::get_rest_plan() const {
   for (const auto& data : m_data) {
     if (data.index() == 1) {
       auto plan = std::get<Plan>(data);
@@ -29,7 +29,7 @@ fsd::Plan fsd::get_rest_plan() const {
     }
   }
 
-  return Plan{"CNY", 0.0f}; // TODO: Add a default unit.
+  return std::nullopt;
 }
 
 std::vector<fsd::Account> fsd::get_balances() const {
