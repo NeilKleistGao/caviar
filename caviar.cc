@@ -13,7 +13,9 @@
 
 #include <filesystem>
 #include <fstream>
+#include <cstdio>
 #include <unordered_map>
+#include <cstring>
 
 namespace caviar {
   void summarize(std::string&& p_filename) {
@@ -48,8 +50,8 @@ namespace caviar {
   }
 
   void truncate(const std::string& p_filename) {
-    std::ifstream fp{p_filename};
-    if (fp.fail() || fp.bad()) {
+    FILE* fp = fopen(p_filename.c_str(), "r");
+    if (fp == nullptr) {
       std::cerr << "can't open file " << p_filename << std::endl;
       return;
     }
@@ -57,12 +59,14 @@ namespace caviar {
     unsigned int size = 0;
     char buffer[1024];
     while (true) {
-      unsigned int real_size = fp.readsome(buffer, sizeof(buffer));
+      std::memset(buffer, 0, sizeof(buffer));
+      fread(buffer, sizeof(buffer) - 1, 1, fp);
+      const std::string s = buffer;
+      unsigned int real_size = s.length();
       if (real_size == 0) {
         break;
       }
 
-      const std::string s = buffer;
       const int pos = s.find("---");
       if (pos != -1) {
         size += pos;
@@ -71,10 +75,16 @@ namespace caviar {
       else {
         size += real_size;
       }
+
+      std::cout << s << ", " << size << std::endl;
     }
 
-    fp.close();
+    fclose(fp);
     using namespace std::filesystem;
+#if WIN32
+    resize_file(path{ p_filename }, size + 3);
+#else
     resize_file(path{p_filename}, size);
+#endif
   }
 } // namespace caviar
